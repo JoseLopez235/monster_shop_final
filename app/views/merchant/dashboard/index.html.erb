@@ -3,7 +3,12 @@
 <p><%= @merchant.city %> <%= @merchant.state %> <%= @merchant.zip %></p>
 
 <%= link_to 'My Items', '/merchant/items' %>
-<%= link_to 'Add Discount', '/merchant/discount' %>
+<%= link_to 'Add Discount', '/merchant/discounts' %>
+
+<%= content_tag :h2, "Discounts" %>
+<% @merchant.discounts.each do |discount|%>
+  <%= "#{discount.discount.to_i}% off #{discount.quantity} items or more" %>
+<% end %>
 
 <section class="orders">
   <% @merchant.pending_orders.each do |order| %>
