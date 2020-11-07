@@ -36,9 +36,19 @@ describe "As A merchant" do
       click_button 'Update Discount'
 
       @discount.reload
-      save_and_open_page
+
       expect(current_path).to eq('/merchant')
       expect(page).to have_content("10% off #{@discount.quantity} items or more")
+    end
+
+    it "If error it will go back to the edit page with a error" do
+      visit "/merchant/discounts/#{@discount.id}/edit"
+
+
+      fill_in 'Quantity', with: ""
+      click_button 'Update Discount'
+
+      expect(page).to have_content("Quantity can't be blank")
     end
   end
 end
