@@ -19,7 +19,7 @@ class  Merchant::DiscountsController < Merchant::BaseController
 
   def update
     @discount = Discount.find(params[:id])
-    if @discount.update!(discount_params)
+    if @discount.update(discount_params)
       redirect_to "/merchant"
     else
       flash[:error] = @discount.errors.full_messages.uniq
