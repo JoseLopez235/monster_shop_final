@@ -7,7 +7,10 @@
 
 <%= content_tag :h2, "Discounts" %>
 <% @merchant.discounts.each do |discount|%>
-  <%= "#{discount.discount.to_i}% off #{discount.quantity} items or more" %>
+  <section id="discounts">
+    <%= "#{discount.discount.to_i}% off #{discount.quantity} items or more" %>
+    <%= link_to "Edit Discount", "/merchant/discounts/#{discount.id}/edit" %>
+  </section><br>
 <% end %>
 
 <section class="orders">
