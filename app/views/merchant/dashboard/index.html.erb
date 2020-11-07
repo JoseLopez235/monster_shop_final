@@ -10,6 +10,7 @@
   <section id="discounts">
     <%= "#{discount.discount.to_i}% off #{discount.quantity} items or more" %>
     <%= link_to "Edit Discount", "/merchant/discounts/#{discount.id}/edit" %>
+    <%= link_to "Delete Discount", "/merchant/discounts/#{discount.id}", method: :delete %>
   </section><br>
 <% end %>
 
