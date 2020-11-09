@@ -74,7 +74,7 @@ RSpec.describe Cart do
         @ogre.id.to_s => 3,
         })
       item = Item.find(@item.item_id)
-      expect(@cart.discount?(item.merchant.discounts, cart.count_of(@item.item_id))).to eq(@discount1)
+      expect(cart.discount?(item)).to eq(@discount1)
     end
 
     it ".discount?() checking with more than one discount" do
@@ -82,7 +82,7 @@ RSpec.describe Cart do
         @ogre.id.to_s => 8,
         })
       item = Item.find(@item.item_id)
-      expect(@cart.discount?(item.merchant.discounts, cart.count_of(@item.item_id))).to eq(@discount2)
+      expect(cart.discount?(item)).to eq(@discount2)
     end
 
     it ".discount" do
@@ -91,7 +91,15 @@ RSpec.describe Cart do
         })
       item = Item.find(@item.item_id)
 
-      expect(cart.subtotal_of(@item.item_id) - cart.discount(cart.subtotal_of(@item.item_id), @cart.discount?(item.merchant.discounts, cart.count_of(@item.item_id)))).to eq(144.0)
+      expect(cart.subtotal_of(item.id) - cart.discount(item, cart.discount?(item))).to eq(144.0)
+    end
+
+    it ".discount for price" do
+      cart = Cart.new({
+        @ogre.id.to_s => 8,
+        })
+      item = Item.find(@item.item_id)
+      expect(item.price - cart.discount(item, cart.discount?(item), true)).to eq(18.0)
     end
   end
 end
