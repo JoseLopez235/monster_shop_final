@@ -16,6 +16,9 @@ RSpec.describe 'Merchant Dashboard' do
       @order_item_2 = @order_2.order_items.create!(item: @hippo, price: @hippo.price, quantity: 2, fulfilled: true)
       @order_item_3 = @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2, fulfilled: false)
       @order_item_4 = @order_3.order_items.create!(item: @giant, price: @giant.price, quantity: 2, fulfilled: false)
+      @discount1 = @merchant_1.discounts.create!(discount: 5.0, quantity: 10)
+      @discount2 = @merchant_1.discounts.create!(discount: 50.0, quantity: 100)
+      @discount3 = @merchant_1.discounts.create!(discount: 100.0, quantity: 1000)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
     end
 
@@ -30,7 +33,9 @@ RSpec.describe 'Merchant Dashboard' do
     it 'I do not have a link to edit the merchant information' do
       visit '/merchant'
 
-      expect(page).to_not have_link('Edit')
+      within "#show" do
+        expect(page).to_not have_link('Edit')
+      end
     end
 
     it 'I see a list of pending orders containing my items' do
@@ -61,6 +66,23 @@ RSpec.describe 'Merchant Dashboard' do
       click_link @order_2.id
 
       expect(current_path).to eq("/merchant/orders/#{@order_2.id}")
+    end
+
+    it "Should have link to add discount" do
+      visit '/merchant'
+
+      expect(page).to have_link("Add Discount")
+
+      click_link "Add Discount"
+      expect(current_path).to eq("/merchant/discounts")
+    end
+
+    it "Could have multiple Discounts" do
+      visit '/merchant'
+
+      expect(page).to have_content("5% off #{@discount1.quantity} items or more")
+      expect(page).to have_content("50% off #{@discount2.quantity} items or more")
+      expect(page).to have_content("100% off #{@discount3.quantity} items or more")
     end
   end
 end
