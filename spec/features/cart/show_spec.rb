@@ -70,7 +70,7 @@ RSpec.describe 'Cart Show Page' do
         visit '/cart'
 
         expect(page).to have_content("A discount has been given to you!")
-        expect(page).to have_content("You will receive a 5% discount on #{@ogre.name}")
+        expect(page).to have_content("You will receive a 5.0% discount on #{@ogre.name}")
         expect(page).to have_content(57.0)
       end
 

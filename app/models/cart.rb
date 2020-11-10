@@ -44,8 +44,12 @@ class Cart
     count_of(item_id) == Item.find(item_id).inventory
   end
 
-  def discount?(item)
-    item.merchant.discounts.where("quantity <= ?", @contents[item.id.to_s]).order(quantity: :desc).limit(1).first
+  def find_discount(item)
+    item.merchant.discounts
+    .where("quantity <= ?", @contents[item.id.to_s])
+    .order(quantity: :desc)
+    .limit(1)
+    .first
   end
 
   def discount(item, discount, price=false)

@@ -13,11 +13,11 @@ class User::OrdersController < ApplicationController
     order = current_user.orders.new
     order.save
       cart.items.each do |item|
-        if cart.discount?(item)
+        if cart.find_discount(item)
           order.order_items.create({
             item: item,
             quantity: cart.count_of(item.id),
-            price: (item.price - cart.discount(item, cart.discount?(item), true)).round(2)
+            price: (item.price - cart.discount(item, cart.find_discount(item), true)).round(2)
             })
         else
           order.order_items.create({
