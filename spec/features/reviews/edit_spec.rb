@@ -12,24 +12,24 @@ RSpec.describe 'Edit Review Page' do
     end
 
     it 'I can link to an edit review form from the item show page' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within "#review-#{@review_1.id}" do
         click_button 'Edit'
       end
 
-      expect(current_path).to eq(edit_review_path(@review_1))
+      expect(current_path).to eq("/reviews/#{@review_1.id}/edit")
     end
 
     it 'I can edit a single review attribute from the edit review page' do
-      visit edit_review_path(@review_1)
+      visit "/reviews/#{@review_1.id}/edit"
 
       updated_title = "Super Great!"
 
       fill_in 'Title', with: updated_title
       click_button 'Update Review'
 
-      expect(current_path).to eq(item_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}")
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(updated_title)
         expect(page).to have_content(@review_1.description)
@@ -38,7 +38,7 @@ RSpec.describe 'Edit Review Page' do
     end
 
     it 'I can edit all review attributes from the edit review page' do
-      visit edit_review_path(@review_1)
+      visit "/reviews/#{@review_1.id}/edit"
 
       updated_title = "Super Great!"
       updated_description = "this thing is super duper"
@@ -49,7 +49,7 @@ RSpec.describe 'Edit Review Page' do
       fill_in 'Rating', with: updated_rating
       click_button 'Update Review'
 
-      expect(current_path).to eq(item_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}")
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(updated_title)
         expect(page).to have_content(updated_description)

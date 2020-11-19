@@ -15,7 +15,7 @@ describe "As A merchant" do
   end
 
   it "If I go to the discount page, I should be able to fill out a form and add a new discount" do
-    visit "/merchant/discounts"
+    visit "/merchant/discounts/new"
 
     fill_in 'Discount', with: 5.0
     fill_in 'Quantity', with: 10
@@ -27,7 +27,7 @@ describe "As A merchant" do
   end
 
   it "Should fail if theres missing information" do
-    visit "/merchant/discounts"
+    visit "/merchant/discounts/new"
 
     fill_in 'Quantity', with: 10
     click_button 'Create Discount'

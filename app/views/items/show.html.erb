@@ -34,10 +34,10 @@
         <h3><%= review.title %></h3>
         <p><%= review.description %></p>
         <p>Rating: <%= review.rating %></p>
-        <%= button_to 'Edit', edit_review_path(review), method: :get %>
-        <%= button_to 'Delete', review_path(review), method: :delete %>
+        <%= button_to 'Edit', "/reviews/#{review.id}/edit", method: :get %>
+        <%= button_to 'Delete', "/reviews/#{review.id}", method: :delete %>
       </section>
     <% end %>
   <% end %>
-  <%= button_to 'Add Review', new_item_review_path(@item), method: :get %>
+  <%= button_to 'Add Review', "/items/#{@item.id}/reviews/new", method: :get %>
 </section>

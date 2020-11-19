@@ -69,20 +69,26 @@ RSpec.describe Cart do
       expect(@cart.count_of(@giant.id)).to eq(1)
     end
 
-    it ".find_discount()" do
-      cart = Cart.new({
-        @ogre.id.to_s => 3,
-        })
-      item = Item.find(@item.item_id)
-      expect(cart.find_discount(item)).to eq(@discount1)
-    end
+    describe ".find_discount()" do
+      it "Finds Discount" do
+        cart = Cart.new({
+          @ogre.id.to_s => 3,
+          })
+        item = Item.find(@item.item_id)
+        expect(cart.find_discount(item)).to eq(@discount1)
+      end
 
-    it ".find_discount() checking with more than one discount" do
-      cart = Cart.new({
-        @ogre.id.to_s => 8,
-        })
-      item = Item.find(@item.item_id)
-      expect(cart.find_discount(item)).to eq(@discount2)
+      it "checking with more than one discount" do
+        cart = Cart.new({
+          @ogre.id.to_s => 8,
+          })
+        item = Item.find(@item.item_id)
+        expect(cart.find_discount(item)).to eq(@discount2)
+      end
+
+      it "When there are 2 discounts it checks for the highest percentage" do
+
+      end
     end
 
     it ".discount" do

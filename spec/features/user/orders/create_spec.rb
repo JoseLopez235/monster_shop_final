@@ -14,11 +14,11 @@ RSpec.describe 'Create Order' do
     end
 
     it 'I can click a link to get to create an order' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
       click_button 'Add to Cart'
-      visit item_path(@hippo)
+      visit "/items/#{@hippo.id}"
       click_button 'Add to Cart'
-      visit item_path(@hippo)
+      visit "/items/#{@hippo.id}"
       click_button 'Add to Cart'
 
       visit '/cart'
@@ -47,11 +47,11 @@ RSpec.describe 'Create Order' do
     end
 
     it "I see a link to log in or register to check out" do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
       click_button 'Add to Cart'
-      visit item_path(@hippo)
+      visit "/items/#{@hippo.id}"
       click_button 'Add to Cart'
-      visit item_path(@hippo)
+      visit "/items/#{@hippo.id}"
       click_button 'Add to Cart'
 
       visit '/cart'

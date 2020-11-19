@@ -32,7 +32,7 @@ RSpec.describe 'Merchant Item Index Page' do
         expect(page).to have_content("Sold by: #{@megan.name}")
         expect(page).to have_content(@megan.name)
       end
-
+      
       expect(page).to_not have_css("#item-#{@hippo.id}")
     end
   end

@@ -9,7 +9,7 @@
 <h2>Order Items</h2>
 <% @order.order_items.each do |order_item| %>
   <section id='order-item-<%= order_item.id %>'>
-    <h3><%= link_to order_item.item.name, item_path(order_item.item) %></h3>
+    <h3><%= link_to order_item.item.name, "/items/#{order_item.item}" %></h3>
     <p><%= order_item.item.description %></p>
     <p>Quantity: <%= order_item.quantity %></p>
     <p>Price: <%= number_to_currency(order_item.price) %></p>

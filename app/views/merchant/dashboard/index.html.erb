@@ -3,7 +3,7 @@
 <p><%= @merchant.city %> <%= @merchant.state %> <%= @merchant.zip %></p>
 
 <%= link_to 'My Items', '/merchant/items' %>
-<%= link_to 'Add Discount', '/merchant/discounts' %>
+<%= link_to 'Add Discount', '/merchant/discounts/new' %>
 
 <%= content_tag :h2, "Discounts" %>
 <% @merchant.discounts.each do |discount|%>

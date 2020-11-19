@@ -74,7 +74,7 @@ RSpec.describe 'Merchant Dashboard' do
       expect(page).to have_link("Add Discount")
 
       click_link "Add Discount"
-      expect(current_path).to eq("/merchant/discounts")
+      expect(current_path).to eq("/merchant/discounts/new")
     end
 
     it "Could have multiple Discounts" do

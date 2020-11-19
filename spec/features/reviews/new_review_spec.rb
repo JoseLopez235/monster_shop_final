@@ -12,17 +12,17 @@ RSpec.describe 'New Review Creation' do
     end
 
     it 'I can link to a new review form from the item show page' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within '.reviews' do
         click_button 'Add Review'
       end
 
-      expect(current_path).to eq(new_item_review_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}/reviews/new")
     end
 
     it 'I can create a new review from the new review page' do
-      visit new_item_review_path(@ogre)
+      visit "/items/#{@ogre.id}/reviews/new"
 
       title = 'Super'
       description = 'It was pretty good'
@@ -35,7 +35,7 @@ RSpec.describe 'New Review Creation' do
 
       new_review = Review.last
 
-      expect(current_path).to eq(item_path(@ogre))
+      expect(current_path).to eq("/items/#{@ogre.id}")
       within "#review-#{new_review.id}" do
         expect(page).to have_content(title)
         expect(page).to have_content(description)
@@ -44,7 +44,7 @@ RSpec.describe 'New Review Creation' do
     end
 
     it 'I can not create a new review with a rating greater than 5' do
-      visit new_item_review_path(@ogre)
+      visit "/items/#{@ogre.id}/reviews/new"
 
       title = 'Super'
       description = 'It was pretty good'
@@ -60,7 +60,7 @@ RSpec.describe 'New Review Creation' do
     end
 
     it 'I can not create a review with a rating less than 1' do
-      visit new_item_review_path(@ogre)
+      visit "/items/#{@ogre.id}/reviews/new"
 
       title = 'Super'
       description = 'It was pretty good'
@@ -76,7 +76,7 @@ RSpec.describe 'New Review Creation' do
     end
 
     it 'I can not create a review without a title' do
-      visit new_item_review_path(@ogre)
+      visit "/items/#{@ogre.id}/reviews/new"
 
       title = 'Super'
       description = 'It was pretty good'
@@ -91,7 +91,7 @@ RSpec.describe 'New Review Creation' do
     end
 
     it 'I can not create a review without a description' do
-      visit new_item_review_path(@ogre)
+      visit "/items/#{@ogre.id}/reviews/new"
 
       title = 'Super'
       description = 'It was pretty good'

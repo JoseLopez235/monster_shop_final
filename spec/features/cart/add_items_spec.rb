@@ -11,7 +11,7 @@ RSpec.describe "Add Items to Cart" do
     end
 
     it "I can add an item from the items show page" do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       click_button 'Add to Cart'
 
@@ -21,11 +21,11 @@ RSpec.describe "Add Items to Cart" do
     end
 
     it "I can add multiple items from the items show page" do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       click_button 'Add to Cart'
 
-      visit item_path(@giant)
+      visit "/items/#{@giant.id}"
 
       click_button 'Add to Cart'
 

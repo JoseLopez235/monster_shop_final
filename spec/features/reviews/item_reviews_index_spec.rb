@@ -12,7 +12,7 @@ RSpec.describe 'Item Reviews Index' do
     end
 
     it 'I can see an index of reviews on the item show page' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within "#review-#{@review_1.id}" do
         expect(page).to have_content(@review_1.title)
@@ -34,7 +34,7 @@ RSpec.describe 'Item Reviews Index' do
     end
 
     it 'I see an indication if an item has no reviews' do
-      visit item_path (@giant)
+      visit "/items/#{@giant.id}"
 
       within '.reviews' do
         expect(page).to have_content('No Reviews Yet!')
@@ -42,7 +42,7 @@ RSpec.describe 'Item Reviews Index' do
     end
 
     it 'I see an average rating for items with reviews' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within '.reviews' do
         expect(page).to have_content("Average Rating: #{@ogre.average_rating.round(2)}")
@@ -50,7 +50,7 @@ RSpec.describe 'Item Reviews Index' do
     end
 
     it 'I see the top 3 and bottom 3 reviews for the item' do
-      visit item_path(@ogre)
+      visit "/items/#{@ogre.id}"
 
       within '#top-three-reviews' do
         expect(page.all('li')[0]).to have_content(@review_1.title)

@@ -31,7 +31,7 @@ RSpec.describe 'Order Show Page' do
 
     it 'I see order information on the show page' do
       3.times do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
       end
       visit '/cart'
@@ -59,7 +59,7 @@ RSpec.describe 'Order Show Page' do
       end
 
       5.times do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
       end
       visit '/cart'
@@ -110,7 +110,7 @@ RSpec.describe 'Order Show Page' do
 
     it "Will show the grand total with the discounts" do
       5.times do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
       end
       visit '/cart'
@@ -127,7 +127,7 @@ RSpec.describe 'Order Show Page' do
 
     it "Will show the grand total without the discounts" do
       1.times do
-        visit item_path(@ogre)
+        visit "/items/#{@ogre.id}"
         click_button 'Add to Cart'
       end
       visit '/cart'

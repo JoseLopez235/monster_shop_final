@@ -139,7 +139,7 @@ RSpec.describe 'User Login and Log Out' do
       fill_in 'Password', with: @user.password
       click_button 'Log In'
 
-      visit item_path(ogre)
+      visit "items/#{ogre.id}"
 
       click_button 'Add to Cart'
 
